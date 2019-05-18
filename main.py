@@ -206,19 +206,20 @@ def checktest():
 def writetext(call):
     startTime = t = int(round(time.time()))
     if call == 1:
-        winstring = 'white is the winner' if CURR_PLAYER else 'black is the winner'
+        dispstring = 'white is the winner' if CURR_PLAYER else 'black is the winner'
     else:
         startTime = t = int(round(time.time()))
-        winstring = 'you are in check' if call == 2 else 'opponent in check'
-    while t - startTime < 3 or call:
+        options = ['white', 'black']
+        in_check = options[not CURR_PLAYER] if call == 2 else options[CURR_PLAYER]
+        dispstring = f'{in_check} is in check'
+    while t - startTime < 3:
         font = pg.font.SysFont('Calibri', 100)
         font2 = pg.font.SysFont('Calibri', 101)
-        text = font.render(winstring, True, colinner)
-        text2 = font2.render(winstring, True, colouter)
+        text = font.render(dispstring, True, colinner)
+        text2 = font2.render(dispstring, True, colouter)
         SURFACE.blit(text, (50, 50))
         SURFACE.blit(text2, (47, 49))
         t = int(round(time.time()))
-        call = False
         pg.display.flip()
 
 
